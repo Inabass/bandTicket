@@ -15,6 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::middleware(['auth'])->group(function () {
+
+    Route::prefix('/admin')->as('admin.')->namespace('Admin')->group(function () {
+        Route::get('/home', 'HomeController@index')->name('home');
+        Route::prefix('/bands')->as('band.')->namespace('Band')->group(function () {
+            Route::get('/', 'BandController@index')->name('index');
+        });
+    });
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
