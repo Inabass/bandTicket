@@ -17,11 +17,9 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::prefix('/admin')->as('admin.')->group(function () {
-
+    Route::prefix('/admin')->as('admin.')->namespace('Admin')->group(function () {
         Route::get('/home', 'HomeController@index')->name('home');
-
-        Route::prefix('/bands')->as('band.')->group(function () {
+        Route::prefix('/bands')->as('band.')->namespace('Band')->group(function () {
             Route::get('/', 'BandController@index')->name('index');
         });
     });
